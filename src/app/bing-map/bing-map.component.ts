@@ -49,6 +49,7 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generateMap() {
+    // only subscribe if we don't have the map initialized yet
     if (!this.bing.map) {
       this.mapReq = this.bing.isMapSetup.subscribe(map => {
         if (map) {
@@ -65,13 +66,16 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createPins(cities: Array<City>): void {
-    for (const city of Object.values(cities)) {
-      const center = new Microsoft.Maps.Location(city.latitude, city.longitude);
-      const pin = new Microsoft.Maps.Pushpin(center, {
-        title: city.state,
-      });
+    // make sure there aren't already pins on the map
+    if (this.bing.map.entities.getLength() === 0) {
+      for (const city of Object.values(cities)) {
+        const center = new Microsoft.Maps.Location(city.latitude, city.longitude);
+        const pin = new Microsoft.Maps.Pushpin(center, {
+          title: city.state,
+        });
 
-      this.setPins(pin);
+        this.setPins(pin);
+      }
     }
   }
 
