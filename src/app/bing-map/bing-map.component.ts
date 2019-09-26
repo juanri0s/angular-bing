@@ -12,10 +12,8 @@ import {BingMapService} from '../bing-map.service';
   providers: [BingMapService]
 })
 export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input()
-  height: number;
-  @ViewChild
-  ('bingMap', {static: true}) bingMap: ElementRef;
+  @Input() height: number;
+  @ViewChild('bingMap', {static: true}) bingMap: ElementRef;
   private CITIES_PATH: string = 'assets/json/cities.json';
   private jsonReq: any;
   private mapReq: any;
