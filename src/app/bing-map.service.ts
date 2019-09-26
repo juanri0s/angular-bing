@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,12 +7,15 @@ import {Injectable} from '@angular/core';
 export class BingMapService {
   public map: Microsoft.Maps.Map;
   private loadPromise: Promise<void>;
+  isMapSetup: Subject<boolean> = new Subject<boolean>();
 
-  constructor() {}
+  constructor() {
+  }
 
   init(element: HTMLElement, options: Microsoft.Maps.IMapLoadOptions): void {
     this.load().then(() => {
       this.map = new Microsoft.Maps.Map(element, options);
+      this.isMapSetup.next(true);
     });
   }
 
@@ -25,13 +29,11 @@ export class BingMapService {
     script.async = true;
     script.defer = true;
 
-    const mapsCallback = 'bingMapsCallback';
-    script.src = `https://www.bing.com/api/maps/mapcontrol?branch=release&clientApi=bingmapsfleettracker&callback=${mapsCallback}`;
+    const mapsCallback = 'getMap';
+    script.src = `https://www.bing.com/api/maps/mapcontrol?callback=${mapsCallback}`;
 
-    this.loadPromise = new Promise<
-      void
-      // tslint:disable-next-line:ban-types
-      >((resolve: Function, reject: Function) => {
+    // tslint:disable-next-line:ban-types
+    this.loadPromise = new Promise<void>((resolve: Function, reject: Function) => {
       window[mapsCallback] = () => {
         resolve();
       };

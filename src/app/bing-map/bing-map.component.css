@@ -1,4 +1,18 @@
 #mapContainer {
-  width: 1000px;
-  height: 500px;
+  width: 100%;
+}
+
+.clear-btn {
+  margin-top: 25px;
+  margin-right: 25px;
+  margin-left: 25px;
+  position: absolute;
+  z-index: 9999;
+}
+
+.reset-btn {
+  margin-top: 25px;
+  margin-left: 125px;
+  position: absolute;
+  z-index: 9999;
 }
