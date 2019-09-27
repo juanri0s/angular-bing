@@ -16,3 +16,10 @@
   position: absolute;
   z-index: 9999;
 }
+
+.connect-btn {
+  margin-top: 25px;
+  margin-left: 225px;
+  position: absolute;
+  z-index: 9999;
+}
