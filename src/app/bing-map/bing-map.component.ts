@@ -138,7 +138,6 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.bing.map.entities.push(line);
       }
     }
-
   }
 
   ngOnDestroy(): void {
