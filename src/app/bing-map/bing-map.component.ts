@@ -4,7 +4,7 @@ import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, On
 import {HttpClient} from '@angular/common/http';
 import {BingLoadService} from './service/bing-load.service';
 import {BingMapService} from './service/bing-map.service';
-import {City} from './city';
+import {State} from './state';
 
 @Component({
   selector: 'app-bing-map',
@@ -46,15 +46,15 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.bing.map) {
       this.bing.mapReq = this.bingLoader.isMapSetup.subscribe(map => {
         if (map) {
-          this.bing.jsonReq = this.bing.getJSON().subscribe((cities: Array<City>) => {
-            this.bing.cities = cities;
+          this.bing.jsonReq = this.bing.getJSON().subscribe((cities: Array<State>) => {
+            this.bing.states = cities;
             this.bing.createPins(cities);
           });
         }
       });
     } else {
-      this.bing.jsonReq = this.bing.getJSON().subscribe((cities: Array<City>) => {
-        this.bing.cities = cities;
+      this.bing.jsonReq = this.bing.getJSON().subscribe((cities: Array<State>) => {
+        this.bing.states = cities;
         this.bing.createPins(cities);
       });
     }

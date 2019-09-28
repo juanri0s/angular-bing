@@ -13,10 +13,36 @@ export class BingLoadService {
   }
 
   init(element: HTMLElement, options: Microsoft.Maps.IMapLoadOptions): void {
+    const MAX_ATTEMPTS: number = 1;
+    let attempts: number = 0;
+
     this.load().then(() => {
       this.bing.map = new Microsoft.Maps.Map(element, options);
+
+      // Only need if you want pin infoboxes to show
+      this.setInitialInfobox();
+
       this.isMapSetup.next(true);
+    }).catch(() => {
+      console.log('retry here');
+      attempts++;
+      if (attempts < MAX_ATTEMPTS) {
+        console.log('attempting again');
+      } else {
+        console.log('max attempts achieved');
+      }
     });
+  }
+
+  setInitialInfobox() {
+    this.bing.infobox = new Microsoft.Maps.Infobox(this.bing.map.getCenter(), {
+      title: 'pushpins',
+      showCloseButton: true,
+      description: 'description',
+      visible: false
+    });
+
+    this.bing.infobox.setMap(this.bing.map);
   }
 
   private load(): Promise<void> {
@@ -35,11 +61,11 @@ export class BingLoadService {
     // tslint:disable-next-line:ban-types
     this.loadPromise = new Promise<void>((resolve: Function, reject: Function) => {
       window[mapsCallback] = () => {
-        resolve();
+        return resolve();
       };
       script.onerror = (error: Event) => {
         console.error('maps script error' + error);
-        reject(error);
+        throw reject(error);
       };
     });
 

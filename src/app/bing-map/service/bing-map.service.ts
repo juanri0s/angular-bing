@@ -2,18 +2,18 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Pin} from '../pin';
-import {City} from '../city';
+import {State} from '../state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BingMapService {
 
-  private CITIES_PATH: string = 'assets/json/cities.json';
+  private STATES_PATH: string = 'assets/json/cities.json';
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
-  public cities: Array<City> = [];
+  public states: Array<State> = [];
   public pins: Array<Microsoft.Maps.Pushpin> = [];
   public infobox: any;
   private NUM_STATES: number = 8;
@@ -22,34 +22,22 @@ export class BingMapService {
   }
 
   public getJSON(): Observable<any> {
-    return this.http.get(this.CITIES_PATH);
+    return this.http.get(this.STATES_PATH);
   }
 
-  setInfobox() {
-    this.infobox = new Microsoft.Maps.Infobox(this.map.getCenter(), {
-      visible: false
-    });
-
-    this.infobox.setMap(this.map);
-  }
-
-  createPins(cities: Array<City>): void {
-    // If you plan on having infoboxes, set an instance of it when we first create the pines
-    this.setInfobox();
-
+  createPins(states: Array<State>): void {
     // make sure there aren't already pins on the map
     if (this.map.entities.getLength() === 0) {
-      for (const city of Object.values(cities)) {
-        const coord = new Microsoft.Maps.Location(city.latitude, city.longitude);
-        const pin = new Microsoft.Maps.Pushpin(coord, {
-          title: city.state,
+      for (const state of Object.values(states)) {
+        const coord = new Microsoft.Maps.Location(state.latitude, state.longitude);
+        let pin = new Microsoft.Maps.Pushpin(coord, {
+          title: state.state,
         });
+
+        // Only need if you want pin infoboxes to show
+        pin = this.setPinInfo(pin, coord, state);
 
         this.pins.push(pin);
-
-        Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
-          this.pinClicked(e);
-        });
       }
 
       this.map.entities.push(this.pins);
@@ -58,7 +46,7 @@ export class BingMapService {
 
   placePins(): void {
     if (this.map.entities.getLength() === 0) {
-      this.createPins(this.cities);
+      this.createPins(this.states);
     }
   }
 
@@ -71,9 +59,14 @@ export class BingMapService {
         this.map.entities.removeAt(i);
       }
 
+      if (this.infobox) {
+        this.infobox.setMap(null);
+      }
+
       if (pin instanceof Microsoft.Maps.Pushpin) {
         this.map.entities.removeAt(i);
       }
+
     }
   }
 
@@ -82,23 +75,23 @@ export class BingMapService {
       let coordA: Microsoft.Maps.Location;
       let coordB: Microsoft.Maps.Location;
       // tslint:disable-next-line:forin
-      for (const key in this.cities) {
+      for (const key in this.states) {
         if (Number(key) === this.NUM_STATES - 1) {
           return;
         }
 
-        const city = this.cities[key];
-        const nextCity = this.cities[Number(key) + 1];
+        const state = this.states[key];
+        const nextState = this.states[Number(key) + 1];
 
         // coordA will be the first point, coordB will be the 2nd point, and then
         // coordB will become coordA for the next iteration
-        if (!coordA && !coordB) {
-          coordA = new Microsoft.Maps.Location(city.latitude, city.longitude);
-          coordB = new Microsoft.Maps.Location(nextCity.latitude, nextCity.longitude);
+        if (coordA && coordB) {
+          coordA = coordB;
+          coordB = new Microsoft.Maps.Location(nextState.latitude, nextState.longitude);
+        } else {
+          coordA = new Microsoft.Maps.Location(state.latitude, state.longitude);
+          coordB = new Microsoft.Maps.Location(nextState.latitude, nextState.longitude);
         }
-
-        coordA = coordB;
-        coordB = new Microsoft.Maps.Location(nextCity.latitude, nextCity.longitude);
 
         const coords: Array<Microsoft.Maps.Location> = [coordA, coordB];
 
@@ -133,33 +126,28 @@ export class BingMapService {
     }
   }
 
+  setPinInfo(pin: Microsoft.Maps.Pushpin, coord: Microsoft.Maps.Location, state: State): Microsoft.Maps.Pushpin {
+    pin.metadata = {
+      title: state.state,
+      description: `Lat: ${state.latitude}, Long: ${state.longitude}`,
+      location: coord,
+    };
+
+    Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
+      this.pinClicked(e);
+    });
+
+    return pin;
+  }
+
   pinClicked(e) {
-    if (e.target) {
+    if (e.target.metadata) {
       this.infobox.setOptions({
-        location: e.target,
         title: e.target.metadata.title,
         description: e.target.metadata.description,
+        location: e.target.metadata.location,
         visible: true
       });
-    }
-  }
-
-  showInfobox(e) {
-
-  }
-
-  showInfoboxes(): void {
-    if (this.map.entities.getLength() !== 0) {
-      for (const city of Object.values(this.cities)) {
-        const coord = new Microsoft.Maps.Location(city.latitude, city.longitude);
-
-        const infobox = new Microsoft.Maps.Infobox(coord, {
-          title: 'Map Center',
-          description: 'Seattle'
-        });
-
-        infobox.setMap(this.map);
-      }
     }
   }
 

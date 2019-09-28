@@ -34,12 +34,9 @@ export class SidebarComponent implements OnInit {
     this.bing.zoomOnPins();
   }
 
-  showInfoboxes(): void {
-    this.bing.showInfoboxes();
-  }
-
   showInfobox(): void {
-    this.bing.showInfobox();
+    // send pin
+    this.bing.pinClicked(2);
   }
 
 
