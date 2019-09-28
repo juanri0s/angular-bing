@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {City} from '../city';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Pin} from '../pin';
+import {City} from '../city';
 
 @Injectable({
   providedIn: 'root'
