@@ -13,7 +13,7 @@ export class BingLoadService {
   }
 
   init(element: HTMLElement, options: Microsoft.Maps.IMapLoadOptions): void {
-    const MAX_ATTEMPTS: number = 1;
+    const MAX_ATTEMPTS: number = 2;
     let attempts: number = 0;
 
     this.load().then(() => {
@@ -24,12 +24,18 @@ export class BingLoadService {
 
       this.isMapSetup.next(true);
     }).catch(() => {
-      console.log('retry here');
       attempts++;
       if (attempts < MAX_ATTEMPTS) {
-        console.log('attempting again');
+        console.log('Initial map load failed, retrying one more time.');
+        this.load().then(() => {
+          this.bing.map = new Microsoft.Maps.Map(element, options);
+          // Only need if you want pin infoboxes to show
+          this.setInitialInfobox();
+
+          this.isMapSetup.next(true);
+        });
       } else {
-        console.log('max attempts achieved');
+        console.log('Max load attempts achieved. Try refreshing.');
       }
     });
   }
