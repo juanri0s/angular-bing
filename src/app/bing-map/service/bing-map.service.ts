@@ -10,6 +10,7 @@ import {State} from '../state';
 export class BingMapService {
 
   private STATES_PATH: string = 'assets/json/states.json';
+  private ICON_PATH: string = 'assets/icons/pin.png';
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
@@ -64,6 +65,10 @@ export class BingMapService {
 
       if (pin instanceof Microsoft.Maps.Pushpin) {
         this.map.entities.removeAt(i);
+
+        pin.setOptions({
+          icon: null
+        });
       }
 
     }
@@ -142,7 +147,7 @@ export class BingMapService {
     return pin;
   }
 
-  hideInfobox() {
+  hideInfobox(): void {
     this.infobox.setOptions({
       visible: false
     });
@@ -155,6 +160,22 @@ export class BingMapService {
         description: e.target.metadata.description,
         location: e.target.metadata.location,
         visible: true
+      });
+    }
+  }
+
+  changePinColor(col: string): void {
+    for (const pin of this.pins) {
+      pin.setOptions({
+        color: col
+      });
+    }
+  }
+
+  changePinIcon(): void {
+    for (const pin of this.pins) {
+      pin.setOptions({
+        icon: this.ICON_PATH
       });
     }
   }

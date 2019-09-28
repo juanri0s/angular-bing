@@ -43,5 +43,12 @@ export class SidebarComponent implements OnInit {
     this.bing.hideInfobox();
   }
 
+  changePinIcon(): void {
+    this.bing.changePinIcon();
+  }
+
+  changePinColor(color: string): void {
+    this.bing.changePinColor(color);
+  }
 
 }
