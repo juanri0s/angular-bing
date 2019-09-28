@@ -9,7 +9,7 @@ import {State} from '../state';
 })
 export class BingMapService {
 
-  private STATES_PATH: string = 'assets/json/cities.json';
+  private STATES_PATH: string = 'assets/json/states.json';
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
@@ -30,9 +30,7 @@ export class BingMapService {
     if (this.map.entities.getLength() === 0) {
       for (const state of Object.values(states)) {
         const coord = new Microsoft.Maps.Location(state.latitude, state.longitude);
-        let pin = new Microsoft.Maps.Pushpin(coord, {
-          title: state.state,
-        });
+        let pin = new Microsoft.Maps.Pushpin(coord, null);
 
         // Only need if you want pin infoboxes to show
         pin = this.setPinInfo(pin, coord, state);

@@ -27,11 +27,11 @@ export class SidebarComponent implements OnInit {
   }
 
   zoomOnPin(): void {
-    this.bing.zoomOnPin();
+    // this.bing.zoomOnPin();
   }
 
   zoomOnPins(): void {
-    this.bing.zoomOnPins();
+    // this.bing.zoomOnPins();
   }
 
   showInfobox(): void {
