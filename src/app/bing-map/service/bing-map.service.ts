@@ -15,6 +15,8 @@ export class BingMapService {
   public map: Microsoft.Maps.Map;
   public cities: Array<City> = [];
   public pins: Array<Microsoft.Maps.Pushpin> = [];
+  public infobox: any;
+  private NUM_STATES: number = 8;
 
   constructor(private http: HttpClient) {
   }
@@ -23,7 +25,18 @@ export class BingMapService {
     return this.http.get(this.CITIES_PATH);
   }
 
+  setInfobox() {
+    this.infobox = new Microsoft.Maps.Infobox(this.map.getCenter(), {
+      visible: false
+    });
+
+    this.infobox.setMap(this.map);
+  }
+
   createPins(cities: Array<City>): void {
+    // If you plan on having infoboxes, set an instance of it when we first create the pines
+    this.setInfobox();
+
     // make sure there aren't already pins on the map
     if (this.map.entities.getLength() === 0) {
       for (const city of Object.values(cities)) {
@@ -33,6 +46,10 @@ export class BingMapService {
         });
 
         this.pins.push(pin);
+
+        Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
+          this.pinClicked(e);
+        });
       }
 
       this.map.entities.push(this.pins);
@@ -64,10 +81,9 @@ export class BingMapService {
     if (this.map.entities.getLength() !== 0) {
       let coordA: Microsoft.Maps.Location;
       let coordB: Microsoft.Maps.Location;
-      const numStates: number = 48;
       // tslint:disable-next-line:forin
       for (const key in this.cities) {
-        if (Number(key) === numStates - 1) {
+        if (Number(key) === this.NUM_STATES - 1) {
           return;
         }
 
@@ -114,6 +130,36 @@ export class BingMapService {
       }
 
       this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoords)});
+    }
+  }
+
+  pinClicked(e) {
+    if (e.target) {
+      this.infobox.setOptions({
+        location: e.target,
+        title: e.target.metadata.title,
+        description: e.target.metadata.description,
+        visible: true
+      });
+    }
+  }
+
+  showInfobox(e) {
+
+  }
+
+  showInfoboxes(): void {
+    if (this.map.entities.getLength() !== 0) {
+      for (const city of Object.values(this.cities)) {
+        const coord = new Microsoft.Maps.Location(city.latitude, city.longitude);
+
+        const infobox = new Microsoft.Maps.Infobox(coord, {
+          title: 'Map Center',
+          description: 'Seattle'
+        });
+
+        infobox.setMap(this.map);
+      }
     }
   }
 
