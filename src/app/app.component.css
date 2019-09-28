@@ -1,0 +1,9 @@
+.sidebar {
+  width: 15%;
+}
+
+.map {
+  position: absolute;
+  right: 0;
+  width: 85%;
+}

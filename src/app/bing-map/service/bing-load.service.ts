@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {BingMapService} from './bing-map.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BingMapService {
-  public map: Microsoft.Maps.Map;
+export class BingLoadService {
   private loadPromise: Promise<void>;
   isMapSetup: Subject<boolean> = new Subject<boolean>();
 
-  constructor() {
+  constructor(private bing: BingMapService) {
   }
 
   init(element: HTMLElement, options: Microsoft.Maps.IMapLoadOptions): void {
     this.load().then(() => {
-      this.map = new Microsoft.Maps.Map(element, options);
+      this.bing.map = new Microsoft.Maps.Map(element, options);
       this.isMapSetup.next(true);
     });
   }

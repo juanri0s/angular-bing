@@ -1,0 +1,11 @@
+.sidebar {
+  width: 15%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  box-shadow: 0 0 19px rgba(0, 0, 0, 0.06);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
