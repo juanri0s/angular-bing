@@ -60,6 +60,7 @@ export class BingMapService {
       }
 
       if (this.infobox) {
+        this.hideInfobox();
         this.infobox.setMap(null);
       }
 
@@ -131,13 +132,22 @@ export class BingMapService {
       title: state.state,
       description: `Lat: ${state.latitude}, Long: ${state.longitude}`,
       location: coord,
+      visible: false
     };
 
     Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
       this.pinClicked(e);
     });
 
+    this.infobox.setMap(this.map);
+
     return pin;
+  }
+
+  hideInfobox() {
+    this.infobox.setOptions({
+      visible: false
+    });
   }
 
   pinClicked(e) {

@@ -39,5 +39,9 @@ export class SidebarComponent implements OnInit {
     this.bing.pinClicked(2);
   }
 
+  hideInfobox(): void {
+    this.bing.hideInfobox();
+  }
+
 
 }
