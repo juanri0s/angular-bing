@@ -11,13 +11,13 @@ export class BingMapService {
 
   private STATES_PATH: string = 'assets/json/states.json';
   private ICON_PATH: string = 'assets/icons/pin.png';
+  private NUM_STATES: number = 8;
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
   public states: Array<State> = [];
   public pins: Array<Microsoft.Maps.Pushpin> = [];
   public infobox: any;
-  private NUM_STATES: number = 8;
 
   constructor(private http: HttpClient) {
   }
@@ -50,27 +50,26 @@ export class BingMapService {
   }
 
   clearPins(): void {
-    for (let i = this.map.entities.getLength() - 1; i >= 0; i--) {
-      const pin = this.map.entities.get(i);
+    // normally you would loop through the existing pins and change the icon
+    if (this.map.entities.getLength() > 0) {
+      for (let i = this.map.entities.getLength() - 1; i >= 0; i--) {
+        const pin = this.map.entities.get(i);
 
-      // If there are polylines we need to clear them too
-      if (pin instanceof Microsoft.Maps.Polyline) {
-        this.map.entities.removeAt(i);
+        // If there are polylines we need to clear them too
+        if (pin instanceof Microsoft.Maps.Polyline) {
+          this.map.entities.removeAt(i);
+        }
+
+        if (this.infobox) {
+          this.hideInfobox();
+          this.infobox.setMap(null);
+        }
+
+        if (pin instanceof Microsoft.Maps.Pushpin) {
+          this.map.entities.removeAt(i);
+          this.pins = [];
+        }
       }
-
-      if (this.infobox) {
-        this.hideInfobox();
-        this.infobox.setMap(null);
-      }
-
-      if (pin instanceof Microsoft.Maps.Pushpin) {
-        this.map.entities.removeAt(i);
-
-        pin.setOptions({
-          icon: null
-        });
-      }
-
     }
   }
 
