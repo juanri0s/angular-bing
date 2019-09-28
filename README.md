@@ -1,4 +1,4 @@
-`angular-bing` is an Angular8 implementation for Bing Maps without any external libraries.
+`angular-bing` is an Angular8 implementation for Bing Maps with various customization options. 
 
 ### Todo
 
