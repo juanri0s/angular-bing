@@ -9,3 +9,15 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+.menu-title {
+  text-align: center;
+}
+
+.angular {
+  color: #c3002f;
+}
+
+.bing {
+  color: #008373;
+}
