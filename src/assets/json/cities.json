@@ -1,10 +1,5 @@
 [
   {
-    "state":"Alaska",
-    "latitude":61.3850,
-    "longitude":-152.2683
-  },
-  {
     "state":"Alabama",
     "latitude":32.7990,
     "longitude":-86.8073
@@ -48,11 +43,6 @@
     "state":"Georgia",
     "latitude":32.9866,
     "longitude":-83.6487
-  },
-  {
-    "state":"Hawaii",
-    "latitude":21.1098,
-    "longitude":-157.5311
   },
   {
     "state":"Iowa",

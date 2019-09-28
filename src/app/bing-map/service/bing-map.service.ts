@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {City} from '../city';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Pin} from '../pin';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class BingMapService {
   public mapReq: any;
   public map: Microsoft.Maps.Map;
   public cities: Array<City> = [];
-  public pins: Array<any> = [];
+  public pins: Array<Microsoft.Maps.Pushpin> = [];
 
   constructor(private http: HttpClient) {
   }
@@ -34,12 +35,8 @@ export class BingMapService {
         this.pins.push(pin);
       }
 
-      this.setPins(this.pins);
+      this.map.entities.push(this.pins);
     }
-  }
-
-  setPins(pin: any): void {
-    this.map.entities.push(pin);
   }
 
   placePins(): void {
@@ -65,9 +62,9 @@ export class BingMapService {
 
   connectPins(): void {
     if (this.map.entities.getLength() !== 0) {
-      let coordA: any;
-      let coordB: any;
-      const numStates = 50;
+      let coordA: Microsoft.Maps.Location;
+      let coordB: Microsoft.Maps.Location;
+      const numStates: number = 48;
       // tslint:disable-next-line:forin
       for (const key in this.cities) {
         if (Number(key) === numStates - 1) {
@@ -87,7 +84,7 @@ export class BingMapService {
         coordA = coordB;
         coordB = new Microsoft.Maps.Location(nextCity.latitude, nextCity.longitude);
 
-        const coords = [coordA, coordB];
+        const coords: Array<Microsoft.Maps.Location> = [coordA, coordB];
 
         const line = new Microsoft.Maps.Polyline(coords, {
           strokeColor: 'red',
@@ -97,6 +94,26 @@ export class BingMapService {
 
         this.map.entities.push(line);
       }
+    }
+  }
+
+  zoomOnPin(pin: Pin): void {
+    const pinCoord = new Microsoft.Maps.Location(pin.latitude, pin.longitude);
+
+    if (this.map.entities.getLength() !== 0) {
+      this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoord)});
+    }
+  }
+
+  zoomOnPins(pins: Array<Pin>): void {
+    const pinCoords: Array<Microsoft.Maps.Location> = [];
+
+    if (this.map.entities.getLength() !== 0) {
+      for (const pin of pins) {
+        pinCoords.push(new Microsoft.Maps.Location(pin.latitude, pin.longitude));
+      }
+
+      this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoords)});
     }
   }
 

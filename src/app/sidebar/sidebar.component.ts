@@ -26,4 +26,12 @@ export class SidebarComponent implements OnInit {
     this.bing.connectPins();
   }
 
+  zoomOnPin(): void {
+    this.bing.zoomOnPin();
+  }
+
+  zomOnPins(): void {
+    this.bing.zoomOnPins();
+  }
+
 }
