@@ -12,12 +12,14 @@ export class BingMapService {
   private STATES_PATH: string = 'assets/json/states.json';
   private ICON_PATH: string = 'assets/icons/pin.png';
   private NUM_STATES: number = 8;
+  private doPinsExist: boolean = false;
+
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
   public states: Array<State> = [];
   public pins: Array<Microsoft.Maps.Pushpin> = [];
-  public infobox: any;
+  public infobox: Microsoft.Maps.Infobox;
 
   constructor(private http: HttpClient) {
   }
@@ -28,7 +30,7 @@ export class BingMapService {
 
   createPins(states: Array<State>): void {
     // make sure there aren't already pins on the map
-    if (this.map.entities.getLength() === 0) {
+    if (!this.doPinsExist) {
       for (const state of Object.values(states)) {
         const coord = new Microsoft.Maps.Location(state.latitude, state.longitude);
         let pin = new Microsoft.Maps.Pushpin(coord, null);
@@ -40,18 +42,22 @@ export class BingMapService {
       }
 
       this.map.entities.push(this.pins);
+
+      if (this.map.entities.getLength() > 0) {
+        this.doPinsExist = true;
+      }
     }
   }
 
   placePins(): void {
-    if (this.map.entities.getLength() === 0) {
+    if (!this.doPinsExist) {
       this.createPins(this.states);
     }
   }
 
   clearPins(): void {
     // normally you would loop through the existing pins and change the icon
-    if (this.map.entities.getLength() > 0) {
+    if (this.doPinsExist) {
       for (let i = this.map.entities.getLength() - 1; i >= 0; i--) {
         const pin = this.map.entities.get(i);
 
@@ -70,11 +76,20 @@ export class BingMapService {
           this.pins = [];
         }
       }
+
+      this.doPinsExist = false;
     }
   }
 
+  resetInfobox(): void {
+    document.getElementById('custom-infobox').remove();
+    this.infobox.setOptions({
+      htmlContent: ''
+    });
+  }
+
   connectPins(): void {
-    if (this.map.entities.getLength() !== 0) {
+    if (this.doPinsExist) {
       let coordA: Microsoft.Maps.Location;
       let coordB: Microsoft.Maps.Location;
       // tslint:disable-next-line:forin
@@ -112,7 +127,7 @@ export class BingMapService {
   zoomOnPin(pin: Pin): void {
     const pinCoord = new Microsoft.Maps.Location(pin.latitude, pin.longitude);
 
-    if (this.map.entities.getLength() !== 0) {
+    if (this.doPinsExist) {
       this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoord)});
     }
   }
@@ -120,7 +135,7 @@ export class BingMapService {
   zoomOnPins(pins: Array<Pin>): void {
     const pinCoords: Array<Microsoft.Maps.Location> = [];
 
-    if (this.map.entities.getLength() !== 0) {
+    if (this.doPinsExist) {
       for (const pin of pins) {
         pinCoords.push(new Microsoft.Maps.Location(pin.latitude, pin.longitude));
       }
@@ -177,6 +192,15 @@ export class BingMapService {
         icon: this.ICON_PATH
       });
     }
+  }
+
+  changeInfoboxTemplate(): void {
+    // tslint:disable-next-line:max-line-length
+    const infoboxTemplate = '<div id="custom-infobox" class="custom-infobox"><b class="custom-infobox-title">{title}</b><a class="custom-infobox-description">{description}</a></div>\n';
+
+    this.infobox.setOptions({
+      htmlContent: infoboxTemplate.replace('{title}', 'myTitle').replace('{description}', 'myDescription')
+    });
   }
 
 }

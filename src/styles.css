@@ -2,3 +2,39 @@
 body {
   margin: 0;
 }
+
+.Infobox {
+  border: none !important;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.custom-infobox {
+  background-color: #303030;
+  min-height: 100px;
+  width: 150px;
+  color: #FFF;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+.custom-infobox-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 220px;
+}
+
+.custom-infobox-description {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: 220px;
+  margin-top: 10px;
+}
