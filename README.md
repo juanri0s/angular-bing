@@ -1,8 +1,1 @@
-`angular-bing` is an Angular8 implementation for Bing Maps with various customization options. 
-
-### Todo
-
-- [ ] Stackblitz link
-- [ ] E2E tests
-- [ ] CSS
-- [ ] Docs
+`angular-bing` is an Angular8 implementation for Bing Maps with various customization options to display all the things you can do with the Bing.
