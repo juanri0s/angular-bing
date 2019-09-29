@@ -1,13 +1,17 @@
 <div class="sidebar">
   <h1 class="menu-title"><span class="angular">angular</span>-<span class="bing">bing</span></h1>
-  <button type="button" (click)="clearPins()"> Clear Pins </button>
-  <button type="button" (click)="placePins()"> Place Pins </button>
-  <button type="button" (click)="connectPins()"> Connect Pins </button>
-  <button type="button" (click)="zoomOnPin()"> Zoom in Pin </button>
-  <button type="button" (click)="zoomOnPins()"> Zoom in on Pins </button>
-  <button type="button" (click)="showInfobox()"> Show Infoboxes </button>
-  <button type="button" (click)="hideInfobox()"> Hide Infobox </button>
-  <button type="button" (click)="changePinIcon()"> Change Pin Icon </button>
-  <button type="button" (click)="changePinColor('red')"> Change Pin Color </button>
-  <button type="button" (click)="changeInfoboxTemplate()"> Change Infobox </button>
+
+  <button class="btn" type="button" (click)="connectPins()"> Connect Pins </button>
+  <button class="btn" type="button" (click)="zoomOnPin()"> Zoom in Pin </button>
+  <button class="btn" type="button" (click)="zoomOnPins()"> Zoom in on Pins </button>
+  <button class="btn" type="button" (click)="showInfobox()"> Show Infoboxes </button>
+  <button class="btn" type="button" (click)="hideInfobox()"> Hide Infobox </button>
+  <button class="btn" type="button" (click)="changePinIcon()"> Change Pin Icon </button>
+  <button class="btn" type="button" (click)="changePinColor('red')"> Change Pin Color </button>
+  <button class="btn" type="button" (click)="changeInfoboxTemplate()"> Change Infobox </button>
+
+  <div class="flex">
+    <button class="btn btn-clear flex-child" type="button" (click)="clearPins()"> Clear Pins </button>
+    <button class="btn btn-primary flex-child" type="button" (click)="placePins()"> Place Pins </button>
+  </div>
 </div>

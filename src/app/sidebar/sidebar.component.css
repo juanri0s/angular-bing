@@ -5,9 +5,11 @@
   top: 0;
   bottom: 0;
   background: #fff;
-  box-shadow: 0 0 19px rgba(0, 0, 0, 0.06);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  -moz-box-shadow: -3px 0 5px 0 #555;
+  -webkit-box-shadow: -3px 0 5px 0 #555;
+  box-shadow: -3px 0 5px 0 #555;
 }
 
 .menu-title {
@@ -20,4 +22,20 @@
 
 .bing {
   color: #008373;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-child {
+  -webkit-box-flex: 1 1 auto;
+  -moz-box-flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
