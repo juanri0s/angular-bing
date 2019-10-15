@@ -55,5 +55,5 @@ body {
 }
 
 .btn:hover {
-  background: #5b83cf;
+  border: 1px red solid;
 }
