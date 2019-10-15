@@ -12,8 +12,8 @@ export class BingMapService {
   private STATES_PATH: string = 'assets/json/states.json';
   private ICON_PATH: string = 'assets/icons/pin.png';
   private NUM_STATES: number = 8;
-  private doPinsExist: boolean = false;
 
+  public doPinsExist: boolean = false;
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;

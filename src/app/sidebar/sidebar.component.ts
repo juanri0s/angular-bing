@@ -8,6 +8,11 @@ import {BingMapService} from '../bing-map/service/bing-map.service';
 })
 export class SidebarComponent implements OnInit {
 
+  isPinsConnected: boolean = false;
+  isIconsChanged: boolean = false;
+  isInfoboxChanged: boolean = false;
+  isInfoboxShowing: boolean = false;
+
   constructor(private bing: BingMapService) {
   }
 
@@ -32,7 +37,14 @@ export class SidebarComponent implements OnInit {
    * connectPins connects each pin together in the pin current pin layer
    */
   connectPins(): void {
-    this.bing.connectPins();
+    if (this.isPinsConnected) {
+      this.isPinsConnected = false;
+      this.clearPins();
+      this.placePins();
+    } else {
+      this.isPinsConnected = true;
+      this.bing.connectPins();
+    }
   }
 
   /**
@@ -61,28 +73,56 @@ export class SidebarComponent implements OnInit {
    * hideInfobox hides all infoboxes in the pin layer
    */
   hideInfobox(): void {
-    this.bing.hideInfobox();
+    if (this.isInfoboxShowing) {
+      this.isInfoboxShowing = false;
+      this.clearPins();
+      this.placePins();
+    } else {
+      this.isInfoboxShowing = true;
+      this.bing.hideInfobox();
+    }
   }
 
   /**
    * changePinIcon changes the icon for all pins in the pin layer
    */
   changePinIcon(): void {
-    this.bing.changePinIcon();
+    if (this.isIconsChanged) {
+      this.isIconsChanged = false;
+      this.clearPins();
+      this.placePins();
+    } else {
+      this.isIconsChanged = true;
+      this.bing.changePinIcon();
+    }
   }
 
   /**
    * changePinColor takes in a color string and changes the color for all pins in the pin layer to that color
    */
   changePinColor(color: string): void {
-    this.bing.changePinColor(color);
+    if (this.isIconsChanged) {
+      this.isIconsChanged = false;
+      this.clearPins();
+      this.placePins();
+    } else {
+      this.isIconsChanged = true;
+      this.bing.changePinColor(color);
+    }
   }
 
   /**
    * changeInfoboxTemplate applies a different html template for infoboxes in the current pin layer
    */
   changeInfoboxTemplate(): void {
-    this.bing.changeInfoboxTemplate();
+    if (this.isIconsChanged) {
+      this.isInfoboxChanged = false;
+      this.clearPins();
+      this.placePins();
+    } else {
+      this.isInfoboxChanged = true;
+      this.bing.changeInfoboxTemplate();
+    }
   }
 
 }

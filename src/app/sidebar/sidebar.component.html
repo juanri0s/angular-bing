@@ -1,17 +1,47 @@
 <div class="sidebar">
   <h1 class="menu-title"><span class="angular">angular</span>-<span class="bing">bing</span></h1>
 
-  <button class="btn" type="button" (click)="connectPins()"> Connect Pins </button>
-  <button class="btn" type="button" (click)="zoomOnPin()"> Zoom in Pin </button>
-  <button class="btn" type="button" (click)="zoomOnPins()"> Zoom in on Pins </button>
-  <button class="btn" type="button" (click)="showInfobox()"> Show Infoboxes </button>
-  <button class="btn" type="button" (click)="hideInfobox()"> Hide Infobox </button>
-  <button class="btn" type="button" (click)="changePinIcon()"> Change Pin Icon </button>
-  <button class="btn" type="button" (click)="changePinColor('red')"> Change Pin Color </button>
-  <button class="btn" type="button" (click)="changeInfoboxTemplate()"> Change Infobox </button>
+  <div class="checkbox-container">
+    <label class="container">Connect Pins
+      <input type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Connect Pins" (click)="connectPins()">
+      <span class="checkmark"></span>
+    </label>
+  </div>
 
-  <div class="flex">
-    <button class="btn btn-clear flex-child" type="button" (click)="clearPins()"> Clear Pins </button>
-    <button class="btn btn-primary flex-child" type="button" (click)="placePins()"> Place Pins </button>
+  <div class="checkbox-container">
+    <label class="container">Change Pin Icon
+      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Pin Icon" (click)="changePinIcon()">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+  <div class="checkbox-container">
+    <label class="container">Change Pin Color
+      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Pin Color" (click)="changePinColor('red')">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+  <div class="checkbox-container">
+    <label class="container">Change Infobox Design
+      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Infobox Design" (click)="changeInfoboxTemplate()">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+  <div class="checkbox-container">
+    <label class="container">Hide Infobox
+      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Hide Infobox" (click)="hideInfobox()">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+  <button class="btn" type="button block" (click)="zoomOnPin()"> Zoom in Pin</button>
+  <button class="btn" type="button block" (click)="zoomOnPins()"> Zoom in on Pins</button>
+  <button class="btn" type="button block" (click)="showInfobox()"> Show Infoboxes</button>
+
+  <div class="flex-ctr">
+    <button class="btn btn-clear flex-child" type="button" (click)="clearPins()"> Clear Pins</button>
+    <button class="btn btn-primary flex-child" type="button" (click)="placePins()"> Place Pins</button>
   </div>
 </div>
