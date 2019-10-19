@@ -2,7 +2,14 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+      <div class="sidebar">
+          <app-sidebar></app-sidebar>
+      </div>
+      <div class="map">
+          <app-bing-map [height]="height"></app-bing-map>
+      </div>
+  `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
