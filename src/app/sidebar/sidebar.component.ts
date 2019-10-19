@@ -12,6 +12,24 @@ export class SidebarComponent implements OnInit {
   isIconsChanged: boolean = false;
   isInfoboxChanged: boolean = false;
   isInfoboxShowing: boolean = false;
+  toggleData: any = [
+    {
+      toggleText: 'Connect Pins',
+      toggleAction: 'connectPins'
+    },
+    {
+      toggleText: 'Change Infobox Design',
+      toggleAction: 'this.changeInfoboxTemplate()'
+    },
+    {
+      toggleText: 'Hide Infobox',
+      toggleAction: 'this.hideInfobox()'
+    },
+    {
+      toggleText: 'Change Pin Icon',
+      toggleAction: 'this.changePinIcon()'
+    },
+  ];
 
   constructor(private bing: BingMapService) {
   }
@@ -37,13 +55,14 @@ export class SidebarComponent implements OnInit {
    * connectPins connects each pin together in the pin current pin layer
    */
   connectPins(): void {
-    if (this.isPinsConnected) {
-      this.isPinsConnected = false;
+    console.log(this.isPinsConnected);
+    if (!this.isPinsConnected) {
+      this.bing.connectPins();
+      this.isPinsConnected = true;
+    } else {
       this.clearPins();
       this.placePins();
-    } else {
-      this.isPinsConnected = true;
-      this.bing.connectPins();
+      this.isPinsConnected = false;
     }
   }
 
