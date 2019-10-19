@@ -1,40 +1,30 @@
 <div class="sidebar">
   <h1 class="menu-title"><span class="angular">angular</span>-<span class="bing">bing</span></h1>
 
-  <div class="checkbox-container">
-    <label class="container">Connect Pins
-      <input type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Connect Pins" (click)="connectPins()">
-      <span class="checkmark"></span>
-    </label>
-  </div>
+  <app-toggle-item
+    [toggleText]="'Connect Pins'"
+    (toggleAction)="connectPins()">
+  </app-toggle-item>
 
-  <div class="checkbox-container">
-    <label class="container">Change Pin Icon
-      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Pin Icon" (click)="changePinIcon()">
-      <span class="checkmark"></span>
-    </label>
-  </div>
+  <app-toggle-item
+    [toggleText]="'Change Infobox Design'"
+    (toggleAction)="changeInfoboxTemplate()">
+  </app-toggle-item>
 
-  <div class="checkbox-container">
-    <label class="container">Change Pin Color
-      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Pin Color" (click)="changePinColor('red')">
-      <span class="checkmark"></span>
-    </label>
-  </div>
+  <app-toggle-item
+    [toggleText]="'Hide Infobox'"
+    (toggleAction)="hideInfobox()">
+  </app-toggle-item>
 
-  <div class="checkbox-container">
-    <label class="container">Change Infobox Design
-      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Change Infobox Design" (click)="changeInfoboxTemplate()">
-      <span class="checkmark"></span>
-    </label>
-  </div>
+  <app-toggle-item
+    [toggleText]="'Change Pin Color'"
+    (toggleAction)="changePinColor('red')">
+  </app-toggle-item>
 
-  <div class="checkbox-container">
-    <label class="container">Hide Infobox
-      <input type="checkbox" type="checkbox" role="checkbox" tabindex="0" aria-labelledby="Hide Infobox" (click)="hideInfobox()">
-      <span class="checkmark"></span>
-    </label>
-  </div>
+  <app-toggle-item
+    [toggleText]="'Change Pin Icon'"
+    (toggleAction)="changePinIcon()">
+  </app-toggle-item>
 
   <button class="btn" type="button block" (click)="zoomOnPin()"> Zoom in Pin</button>
   <button class="btn" type="button block" (click)="zoomOnPins()"> Zoom in on Pins</button>
