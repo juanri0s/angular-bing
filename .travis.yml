@@ -1,7 +1,3 @@
-## our React TodoMVC app is written
-## in node so thats what we select.
-## Cypress is agnostic to your apps
-## backend language though.
 language: node_js
 
 node_js:
