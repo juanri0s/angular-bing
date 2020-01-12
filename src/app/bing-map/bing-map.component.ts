@@ -1,10 +1,10 @@
 // tslint:disable-next-line:no-reference
 /// <reference path="../../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.d.ts" />
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BingLoadService} from './service/bing-load.service';
-import {BingMapService} from './service/bing-map.service';
-import {State} from './state';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BingLoadService } from './service/bing-load.service';
+import { BingMapService } from './service/bing-map.service';
+import { State } from './state';
 
 @Component({
   selector: 'app-bing-map',
@@ -15,7 +15,7 @@ import {State} from './state';
 })
 export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() height: number;
-  @ViewChild('bingMap', {static: true}) bingMap: ElementRef;
+  @ViewChild('bingMap', { static: true }) bingMap: ElementRef;
 
   constructor(private http: HttpClient, private bing: BingMapService, private bingLoader: BingLoadService) {
   }

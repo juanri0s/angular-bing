@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {BingMapService} from '../bing-map/service/bing-map.service';
+import { Component } from '@angular/core';
+import { BingMapService } from '../bing-map/service/bing-map.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
-
+export class SidebarComponent {
   isPinsConnected: boolean = false;
   isIconsChanged: boolean = false;
   isInfoboxChanged: boolean = false;
@@ -28,14 +27,10 @@ export class SidebarComponent implements OnInit {
     {
       toggleText: 'Change Pin Icon',
       toggleAction: 'this.changePinIcon()'
-    },
+    }
   ];
 
-  constructor(private bing: BingMapService) {
-  }
-
-  ngOnInit() {
-  }
+  constructor(private bing: BingMapService) { }
 
   /**
    * placePins applies a default pin layer to the map
@@ -143,5 +138,4 @@ export class SidebarComponent implements OnInit {
       this.bing.changeInfoboxTemplate();
     }
   }
-
 }

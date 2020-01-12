@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Pin} from '../pin';
-import {State} from '../state';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Pin } from '../pin';
+import { State } from '../state';
 
 @Injectable({
   providedIn: 'root'
@@ -128,7 +128,7 @@ export class BingMapService {
     const pinCoord = new Microsoft.Maps.Location(pin.latitude, pin.longitude);
 
     if (this.doPinsExist) {
-      this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoord)});
+      this.map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoord) });
     }
   }
 
@@ -140,7 +140,7 @@ export class BingMapService {
         pinCoords.push(new Microsoft.Maps.Location(pin.latitude, pin.longitude));
       }
 
-      this.map.setView({bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoords)});
+      this.map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoords) });
     }
   }
 
