@@ -8,9 +8,9 @@ describe('BingMapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BingMapComponent ]
+      declarations: [BingMapComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

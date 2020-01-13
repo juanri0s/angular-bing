@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 10
+  - 11
 
 cache:
   directories:
@@ -12,7 +12,11 @@ install:
   - npm ci
 
 before_script:
-  - npm start -- --silent &
+  - npm install -g @angular/cli
 
 script:
-  - npm run cy:run
+  - npm install
+  - npm run build --prod
+deploy:
+  skip_cleanup: true
+  provider: firebase

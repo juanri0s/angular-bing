@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
-import {BingMapService} from './bing-map.service';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { BingMapService } from './bing-map.service';
 
 @Injectable({
   providedIn: 'root'
