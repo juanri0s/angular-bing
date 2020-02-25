@@ -17,7 +17,7 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() height: number;
   @ViewChild('bingMap', { static: true }) bingMap: ElementRef;
 
-  constructor(private http: HttpClient, private bing: BingMapService, private bingLoader: BingLoadService) {
+  constructor(private bing: BingMapService, private bingLoader: BingLoadService) {
   }
 
   ngOnInit(): void {

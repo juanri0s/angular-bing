@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToggleComponent } from './toggle.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 describe('ToggleItemComponent', () => {
   let component: ToggleComponent;
@@ -8,7 +9,7 @@ describe('ToggleItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ToggleComponent]
+      declarations: [ToggleComponent, SidebarComponent]
     })
       .compileComponents();
   }));

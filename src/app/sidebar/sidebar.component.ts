@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BingMapService } from '../bing-map/service/bing-map.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { BingMapService } from '../bing-map/service/bing-map.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @Input() title: string;
   isPinsConnected: boolean = false;
   isIconsChanged: boolean = false;
   isInfoboxChanged: boolean = false;

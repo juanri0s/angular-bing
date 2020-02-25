@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleComponent {
-  @Input() toggleText;
+  @Input() toggleText: string;
   @Output() toggled = new EventEmitter();
 
   on: boolean;

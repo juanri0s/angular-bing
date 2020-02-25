@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
+import { ToggleComponent } from '../toggle/toggle.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -8,7 +10,8 @@ describe('SidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SidebarComponent]
+      declarations: [SidebarComponent, ToggleComponent],
+      providers: [HttpClient, HttpHandler]
     })
       .compileComponents();
   }));

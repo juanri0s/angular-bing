@@ -1,29 +1,19 @@
 <div class="sidebar">
   <h1 class="menu-title"><span class="angular">angular</span>-<span class="bing">bing</span></h1>
 
-  <app-toggle
-    [toggleText]="'Connect Pins'"
-    (toggled)="connectPins()">
+  <app-toggle [toggleText]="'Connect Pins'" (toggled)="connectPins()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Infobox Design'"
-    (toggled)=changeInfoboxTemplate()>
+  <app-toggle [toggleText]="'Change Infobox Design'" (toggled)="changeInfoboxTemplate()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Hide Infobox'"
-    (toggled)="hideInfobox()">
+  <app-toggle [toggleText]="'Hide Infobox'" (toggled)="hideInfobox()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Pin Color'"
-    (toggled)="changePinColor('red')">
+  <app-toggle [toggleText]="'Change Pin Color'" (toggled)="changePinColor('red')">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Pin Icon'"
-    (toggled)="changePinIcon()">
+  <app-toggle [toggleText]="'Change Pin Icon'" (toggled)="changePinIcon()">
   </app-toggle>
 
   <button class="btn" type="button block" (click)="zoomOnPin()"> Zoom in Pin</button>
