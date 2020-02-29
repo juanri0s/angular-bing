@@ -24,9 +24,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-bing'`, () => {
+  it('should have as title "angular-bing"', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('angular-bing');
+  });
+
+  it('should set a height equal to window height', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
+    const windowHeight = window.innerHeight;
+    component.height = window.innerHeight;
+    expect(component.height).toEqual(windowHeight);
   });
 });
