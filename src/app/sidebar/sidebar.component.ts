@@ -12,24 +12,6 @@ export class SidebarComponent {
   isIconsChanged: boolean = false;
   isInfoboxChanged: boolean = false;
   isInfoboxShowing: boolean = false;
-  toggleData: any = [
-    {
-      toggleText: 'Connect Pins',
-      toggleAction: 'connectPins'
-    },
-    {
-      toggleText: 'Change Infobox Design',
-      toggleAction: 'this.changeInfoboxTemplate()'
-    },
-    {
-      toggleText: 'Hide Infobox',
-      toggleAction: 'this.hideInfobox()'
-    },
-    {
-      toggleText: 'Change Pin Icon',
-      toggleAction: 'this.changePinIcon()'
-    }
-  ];
 
   constructor(private bing: BingMapService) { }
 
@@ -138,5 +120,9 @@ export class SidebarComponent {
       this.isInfoboxChanged = true;
       this.bing.changeInfoboxTemplate();
     }
+  }
+
+  test() {
+    console.log('here')
   }
 }
