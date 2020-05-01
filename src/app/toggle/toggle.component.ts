@@ -4,8 +4,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-toggle',
   template: `
       <div class="checkbox-container" >
-          <label class="container" [for]="toggleText" (click)="onClick()" >{{ toggleText }}
-            <input type="checkbox" role="checkbox" tabindex="0" >
+          <label class="container" [for]="toggleText" (click)="onClick()" (keyup.enter)="onClick()">{{ toggleText }}
+            <input type="checkbox" role="checkbox" [checked]="on" tabindex="0" >
             <span class="checkmark"></span>
           </label>
       </div>
