@@ -5,6 +5,7 @@
   top: 0;
   bottom: 0;
   background: #fff;
+  z-index: -1;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   -moz-box-shadow: -3px 0 5px 0 #555;

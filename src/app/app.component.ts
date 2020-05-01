@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
       <div class="sidebar">
-          <app-sidebar></app-sidebar>
+          <app-sidebar [title]="title"></app-sidebar>
       </div>
       <div class="map">
           <app-bing-map [height]="height"></app-bing-map>

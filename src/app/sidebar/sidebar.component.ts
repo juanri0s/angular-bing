@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BingMapService } from '../bing-map/service/bing-map.service';
 
 @Component({
@@ -7,28 +7,11 @@ import { BingMapService } from '../bing-map/service/bing-map.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @Input() title: string;
   isPinsConnected: boolean = false;
   isIconsChanged: boolean = false;
   isInfoboxChanged: boolean = false;
   isInfoboxShowing: boolean = false;
-  toggleData: any = [
-    {
-      toggleText: 'Connect Pins',
-      toggleAction: 'connectPins'
-    },
-    {
-      toggleText: 'Change Infobox Design',
-      toggleAction: 'this.changeInfoboxTemplate()'
-    },
-    {
-      toggleText: 'Hide Infobox',
-      toggleAction: 'this.hideInfobox()'
-    },
-    {
-      toggleText: 'Change Pin Icon',
-      toggleAction: 'this.changePinIcon()'
-    }
-  ];
 
   constructor(private bing: BingMapService) { }
 
@@ -50,7 +33,6 @@ export class SidebarComponent {
    * connectPins connects each pin together in the pin current pin layer
    */
   connectPins(): void {
-    console.log(this.isPinsConnected);
     if (!this.isPinsConnected) {
       this.bing.connectPins();
       this.isPinsConnected = true;
@@ -72,7 +54,7 @@ export class SidebarComponent {
    * zoomOnPins takes in an array of pins and zooms in to the boundary area on the map
    */
   zoomOnPins(): void {
-    // this.bing.zoomOnPins();
+    this.bing.zoomOnPins(this.bing.pinLocations);
   }
 
   /**
@@ -137,5 +119,9 @@ export class SidebarComponent {
       this.isInfoboxChanged = true;
       this.bing.changeInfoboxTemplate();
     }
+  }
+
+  test() {
+    console.log('here')
   }
 }

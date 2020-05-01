@@ -1,37 +1,29 @@
 <div class="sidebar">
   <h1 class="menu-title"><span class="angular">angular</span>-<span class="bing">bing</span></h1>
 
-  <app-toggle
-    [toggleText]="'Connect Pins'"
-    (toggled)="connectPins()">
+  <app-toggle [toggleText]="'Connect Pins'" (toggled)="connectPins()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Infobox Design'"
-    (toggled)=changeInfoboxTemplate()>
+  <app-toggle [toggleText]="'Change Infobox Design'" (toggled)="changeInfoboxTemplate()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Hide Infobox'"
-    (toggled)="hideInfobox()">
+  <app-toggle [toggleText]="'Hide Infobox'" (toggled)="hideInfobox()">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Pin Color'"
-    (toggled)="changePinColor('red')">
+  <app-toggle [toggleText]="'Change Pin Color'" (toggled)="changePinColor('red')">
   </app-toggle>
 
-  <app-toggle
-    [toggleText]="'Change Pin Icon'"
-    (toggled)="changePinIcon()">
+  <app-toggle [toggleText]="'Change Pin Icon'" (toggled)="changePinIcon()">
   </app-toggle>
 
-  <button class="btn" type="button block" (click)="zoomOnPin()"> Zoom in Pin</button>
-  <button class="btn" type="button block" (click)="zoomOnPins()"> Zoom in on Pins</button>
-  <button class="btn" type="button block" (click)="showInfobox()"> Show Infoboxes</button>
+  <button id="zoom-in-btn" class="btn" type="button block" (click)="zoomOnPin()"> Zoom in Pin</button>
+  <button id="zoom-in-multi-btn" class="btn" type="button block" (click)="zoomOnPins()"> Zoom in on Pins</button>
+  <button id="show-infoboxes-btn" class="btn" type="button block" (click)="showInfobox()"> Show Infoboxes</button>
 
   <div class="flex-ctr">
-    <button class="btn btn-clear flex-child" type="button" (click)="clearPins()"> Clear Pins</button>
-    <button class="btn btn-primary flex-child" type="button" (click)="placePins()"> Place Pins</button>
+    <button id="clear-pins-btn" class="btn btn-clear flex-child" type="button" (click)="clearPins()"> Clear
+      Pins</button>
+    <button id="place-plins-btn" class="btn btn-primary flex-child" type="button" (click)="placePins()"> Place
+      Pins</button>
   </div>
 </div>

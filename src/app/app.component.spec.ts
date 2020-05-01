@@ -1,12 +1,20 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { BingMapComponent } from './bing-map/bing-map.component';
+import { ToggleComponent } from './toggle/toggle.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        SidebarComponent,
+        BingMapComponent,
+        ToggleComponent
       ],
+      providers: [HttpClient, HttpHandler]
     }).compileComponents();
   }));
 
@@ -16,16 +24,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'untitled'`, () => {
+  it('should have as title "angular-bing"', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('untitled');
+    expect(app.title).toEqual('angular-bing');
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should set a height equal to window height', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to untitled!');
+    const component = fixture.componentInstance;
+    const windowHeight = window.innerHeight;
+    component.height = window.innerHeight;
+    expect(component.height).toEqual(windowHeight);
   });
 });

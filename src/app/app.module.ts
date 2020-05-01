@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BingMapComponent } from './bing-map/bing-map.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToggleComponent } from './toggle/toggle.component';
 

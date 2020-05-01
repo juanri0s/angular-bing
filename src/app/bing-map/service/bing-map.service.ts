@@ -14,11 +14,12 @@ export class BingMapService {
   private NUM_STATES: number = 8;
 
   public doPinsExist: boolean = false;
+  public pinLocations: Microsoft.Maps.Location[] = [];
   public jsonReq: any;
   public mapReq: any;
   public map: Microsoft.Maps.Map;
-  public states: Array<State> = [];
-  public pins: Array<Microsoft.Maps.Pushpin> = [];
+  public states: State[] = [];
+  public pins: Microsoft.Maps.Pushpin[] = [];
   public infobox: Microsoft.Maps.Infobox;
 
   constructor(private http: HttpClient) {
@@ -34,6 +35,8 @@ export class BingMapService {
       for (const state of Object.values(states)) {
         const coord = new Microsoft.Maps.Location(state.latitude, state.longitude);
         let pin = new Microsoft.Maps.Pushpin(coord, null);
+
+        this.pinLocations.push(coord);
 
         // Only need if you want pin infoboxes to show
         pin = this.setPinInfo(pin, coord, state);
@@ -132,15 +135,9 @@ export class BingMapService {
     }
   }
 
-  zoomOnPins(pins: Array<Pin>): void {
-    const pinCoords: Array<Microsoft.Maps.Location> = [];
-
+  zoomOnPins(pins: Array<Microsoft.Maps.Location>): void {
     if (this.doPinsExist) {
-      for (const pin of pins) {
-        pinCoords.push(new Microsoft.Maps.Location(pin.latitude, pin.longitude));
-      }
-
-      this.map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(pinCoords) });
+      this.map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(pins) });
     }
   }
 
