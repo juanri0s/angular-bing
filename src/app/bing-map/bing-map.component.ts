@@ -31,6 +31,7 @@ export class BingMapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getMap(): void {
     this.bingLoader.init(this.bingMap.nativeElement, {
       credentials: 'key.keyValue',
+      liteMode: true,
       showDashboard: true,
       showZoomButtons: true,
       disableBirdseye: true,

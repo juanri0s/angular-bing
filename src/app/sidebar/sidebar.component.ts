@@ -33,7 +33,6 @@ export class SidebarComponent {
    * connectPins connects each pin together in the pin current pin layer
    */
   connectPins(): void {
-    console.log(this.isPinsConnected);
     if (!this.isPinsConnected) {
       this.bing.connectPins();
       this.isPinsConnected = true;
@@ -55,7 +54,7 @@ export class SidebarComponent {
    * zoomOnPins takes in an array of pins and zooms in to the boundary area on the map
    */
   zoomOnPins(): void {
-    // this.bing.zoomOnPins();
+    this.bing.zoomOnPins(this.bing.pinLocations);
   }
 
   /**
